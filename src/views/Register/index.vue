@@ -1,16 +1,12 @@
 <template>
-  <div>Register</div>
+  <div>Register...</div>
 </template>
 
 <script>
 export default {
-  name: 'Register',
-  data () {
-   return {}
-  },
-}
+  name: "Register",
+};
 </script>
 
 <style lang="less" scoped>
-
 </style>

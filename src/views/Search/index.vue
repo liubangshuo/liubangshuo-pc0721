@@ -1,16 +1,12 @@
 <template>
-  <div>Search</div>
+  <div>Search...</div>
 </template>
 
 <script>
 export default {
-  name: 'Search',
-  data () {
-   return {}
-  },
-}
+  name: "Search",
+};
 </script>
 
 <style lang="less" scoped>
-
 </style>

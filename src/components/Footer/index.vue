@@ -4,13 +4,12 @@
 
 <script>
 export default {
-  name: 'Footer',
-  data () {
-   return {}
-  },
-}
+  name: "Footer",
+};
 </script>
 
-<style lang="less" scoped>
-
+<style lang="less">
+// .footer-aaa {
+//   color: green;
+// }
 </style>
