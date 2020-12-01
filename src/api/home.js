@@ -17,8 +17,8 @@ export const reqGetBanners = () => {
   });
 };
 
-
 // 获取首页楼层数据
+ 
 export const reqGetFloors = () => {
   return mockRequest({
     method: "GET",

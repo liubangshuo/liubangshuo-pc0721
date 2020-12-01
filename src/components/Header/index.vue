@@ -103,11 +103,6 @@ export default {
       const location = {
         // path: "/search",
         name: "search", // 使用命名路由
-        // params: {
-        //   searchText: searchText,
-        // },
-        // query: {
-        // },
       };
 
       if (searchText) {
@@ -125,19 +120,8 @@ export default {
 
       this.$router.push(
         location
-        // (res) => {
-        //   console.log("成功", res);
-        // },
-        // (err) => {
-        //   console.log(err);
-        // }
+        
       );
-      // .then((res) => {
-      //   console.log("成功", res);
-      // })
-      // .catch((err) => {
-      //   console.log("err", err);
-      // });
     },
   },
 };
@@ -156,7 +140,6 @@ export default {
     所以样式只会对当前组件生效，其他组件不会影响
 */
 // .header-aaa {
-//   color: red;
 // }
 
 .container {

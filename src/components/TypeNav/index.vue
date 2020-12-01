@@ -1,12 +1,8 @@
 <template>
   <!-- 商品分类导航 -->
   <div class="type-nav">
-    <div
-      class="container"
-      @mouseenter="isSearchShow = true"
-      @mouseleave="isSearchShow = false"
-    >
-      <h2 class="all">全部商品分类</h2>
+    <div class="container" @mouseleave="isSearchShow = false">
+      <h2 class="all" @mouseenter="isSearchShow = true">全部商品分类</h2>
       <nav class="nav">
         <a href="###">服装城</a>
         <a href="###">美妆馆</a>
@@ -33,6 +29,8 @@
                   :data-categoryType="1"
                   >{{ category.categoryName }}</a
                 >
+                <!-- 第一种方案：使用router-link跳转，问题产生太多组件，页面性能不会很好 -->            
+                <!-- 第二种方案：编程式导航 -->              
               </h3>
               <div class="item-list clearfix">
                 <div class="subitem">
@@ -61,7 +59,7 @@
                           :data-categoryId="grandChild.categoryId"
                           :data-categoryType="3"
                           >{{ grandChild.categoryName }}</a
-                        >
+                        >                     
                       </em>
                     </dd>
                   </dl>
@@ -109,6 +107,7 @@ export default {
     ...mapActions(["getCategoryList"]),
     // 跳转到search
     goSearch(e) {
+      // 注意：自定义属性都是小写
       const { categoryname, categoryid, categorytype } = e.target.dataset; // 元素自定义属性对象
 
       // 需求：如何获取需要的参数？
@@ -122,7 +121,7 @@ export default {
       this.isSearchShow = false;
 
       const location = {
-        name: "search",
+        name: "search", // 必须使用命名路由（因为要使用params参数）
         query: {
           categoryName: categoryname,
           [`category${categorytype}Id`]: categoryid,
@@ -143,6 +142,8 @@ export default {
   },
   mounted() {
     // console.log(this);
+    // 在请求之前先判断vuex有没有数据
+    if (this.categoryList.length) return;
     // 调用vuex的action函数
     this.getCategoryList();
   },

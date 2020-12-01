@@ -16,6 +16,11 @@ import Footer from "@comps/Footer";
 
 export default {
   name: "App",
+  // data() {
+  //   return {
+  //     isFooterShow: true,
+  //   };
+  // },
   components: {
     Header,
     Footer,

@@ -51,7 +51,8 @@ instance.interceptors.response.use(
       
       返回一个具体为
         成功：成功的数据
-        失败：失败的原因 
+        失败：失败的原因
+      的结果   
 
       response的数据结构：
         {
@@ -64,7 +65,7 @@ instance.interceptors.response.use(
             data:{
               nickName:"Administrator",
               name:"Admin",
-              token: 随机数"
+              token: 90aa16f24d04c7d882051412f9ec45b"
             },
             ok: true 
           } 

@@ -1,9 +1,5 @@
 // home组件的vuex状态
-import {
-  reqGetBanners,
-  reqGetBaseCategoryList,
-  reqGetFloors
-} from "@api/home";
+import { reqGetBaseCategoryList, reqGetBanners, reqGetFloors } from "@api/home";
 
 export default {
   state: {
@@ -14,25 +10,24 @@ export default {
   getters: {},
   actions: {
     // 获取首页三级分类列表数据
-    async getCategoryList({
-      commit
-    }) {
+    async getCategoryList({ commit }) {
       // 发送请求
       const categoryList = await reqGetBaseCategoryList();
       // 触发mutation函数
       commit("GET_CATEGORY_LIST", categoryList);
     },
-    async reqGetBanners({
-      commit
-    }) {
+
+    // async函数会返回一个promise对象
+    // 这个promise对象：当内部代码全部执行完毕时，会变成成功
+    async getBanners({ commit }) {
+      // console.log("actions");
       const banners = await reqGetBanners();
+      // 调用commit 同步调用mutation函数
       commit("GET_BANNERS", banners);
     },
 
-    async reqGetFloors({
-      commit
-    }) {
-      const fllors = await reqGetFloors();
+    async getFloors({ commit }) {
+      const floors = await reqGetFloors();
       commit("GET_FLOORS", floors);
     },
   },
@@ -41,6 +36,7 @@ export default {
       state.categoryList = categoryList;
     },
     GET_BANNERS(state, banners) {
+      // console.log("mutation");
       state.banners = banners;
     },
     GET_FLOORS(state, floors) {
