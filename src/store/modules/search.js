@@ -1,10 +1,12 @@
 // search组件的vuex状态
-import { reqGetProductList } from "@api/search";
+import {
+  reqGetProductList
+} from "@api/search";
 
 export default {
   state: {
     productList: {
-      trademarkList: [], // 品牌数据
+      trademarkList: [], //品牌属性
       attrsList: [], // 品牌属性数据
       goodsList: [], // 商品数据
     },
@@ -21,8 +23,10 @@ export default {
       return state.productList.goodsList;
     },
   },
-  actions: {
-    async getProductList({ commit }, data = {}) {
+  actions:{
+    async getProductList({
+      commit
+    }, data = {}) {
       const productList = await reqGetProductList(data);
       commit("GET_PRODUCT_LIST", productList);
     },

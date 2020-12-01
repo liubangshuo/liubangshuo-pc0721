@@ -36,6 +36,7 @@ export default {
       required: true,
     },
   },
+  // 利用watch监视 
   watch: {
     carouselList() {
       // [] --> 最终的数据 数据发生变化才会触发
@@ -46,6 +47,7 @@ export default {
       // 确保：swiper不能new多次
       if (this.swiper) return;
       
+      // 在这里初始化swiper
       this.$nextTick(() => {
         this.initSwiper();
       });
@@ -54,7 +56,7 @@ export default {
   methods: {
     initSwiper() {
       // 使用 this.$refs.swiper 取代 .swiper-container
-      // 使用 this.$refs.swiper 才能保证轮播图组件使用的自己的swiper
+      // 使用 this.$refs.swiper 才能保证轮播图组件使用自己的swiper
       this.swiper = new Swiper(this.$refs.swiper, {
         loop: true, // 循环模式选项
         autoplay: {
@@ -85,7 +87,7 @@ export default {
     */
     if (!this.carouselList.length) return;
 
-    this.initSwiper();
+    this.initSwiper();//更新完成后 直接调用即可
   },
 };
 </script>
