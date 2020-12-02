@@ -117,12 +117,19 @@ export default {
       if (categoryName) {
         location.query = this.$route.query;
       }
+      if (this.$route.name === "search") {
+        this.$router.replace(location);
+      } else {
+        this.$router.push(location);
+      }
 
-      this.$router.push(
-        location
-        
-      );
     },
+  },
+  mounted() {
+    this.$bus.$on("clearKeyword", () => {
+      //清空searchText
+      this.searchText = "";
+    });
   },
 };
 </script>

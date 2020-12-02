@@ -137,7 +137,12 @@ export default {
         };
       }
 
-      this.$router.push(location);
+      if (this.$route.name === "search") {
+         this.$router.replace(location);
+      } else {
+        this.$router.push(location);
+      }
+      
     },
   },
   mounted() {
