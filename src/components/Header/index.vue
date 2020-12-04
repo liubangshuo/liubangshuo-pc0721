@@ -103,6 +103,11 @@ export default {
       const location = {
         // path: "/search",
         name: "search", // 使用命名路由
+        // params: {
+        //   searchText: searchText,
+        // },
+        // query: {
+        // },
       };
 
       if (searchText) {
@@ -117,17 +122,39 @@ export default {
       if (categoryName) {
         location.query = this.$route.query;
       }
-      if (this.$route.name === "search") {
+
+      // if (this.$route.path.indexOf('/search') > -1) {
+      // if (this.$route.path.includes("/search")) {
+      // if (this.$route.path.startsWith("/search")) {
+      // if (/^\/search/.test(this.$route.path)) {
+      // this.$route.path 路径路由
+      // this.$route.name 命名路由名称
+      if (this.$route.name === 'search') {
         this.$router.replace(location);
       } else {
         this.$router.push(location);
       }
 
+      // this.$router.replace(
+      //   location
+      //   // (res) => {
+      //   //   console.log("成功", res);
+      //   // },
+      //   // (err) => {
+      //   //   console.log(err);
+      //   // }
+      // );
+      // .then((res) => {
+      //   console.log("成功", res);
+      // })
+      // .catch((err) => {
+      //   console.log("err", err);
+      // });
     },
   },
   mounted() {
     this.$bus.$on("clearKeyword", () => {
-      //清空searchText
+      // 清空searchText
       this.searchText = "";
     });
   },
@@ -147,6 +174,7 @@ export default {
     所以样式只会对当前组件生效，其他组件不会影响
 */
 // .header-aaa {
+//   color: red;
 // }
 
 .container {

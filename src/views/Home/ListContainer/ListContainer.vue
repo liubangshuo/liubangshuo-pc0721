@@ -82,7 +82,6 @@
 import { mapState, mapActions } from "vuex";
 import Carousel from "@comps/Carousel";
 
-
 export default {
   name: "ListContainer",
   methods: {
@@ -96,26 +95,73 @@ export default {
   async mounted() {
     // await就会等待vuex将数据更新完毕，再执行后面代码
     await this.getBanners(); // action函数
-  
+
+    // console.log("new Swiper", this.banners);
     /* 
-      1、在mounted中new Swiper, 为了保证DOM结构生成了在new
-      2. mounted直接new Swiper 此时还没有获取到banners数据
-        轮播图片还未生成 所以失败
-      3. 要等轮播图图片数据请求回来 在new Swiper
-      4. await this.getBanners() --> 等待vuex将数据更新完毕 在执行后面代码
-      5. 轮播图数据有了,但是DOM结构没有 
-        更新用户界面都是异步的,所以要等同步全部执行完,在去更新
-      6. 方案一: 定时器
-        通过定时器将new Seiper添加宏任务队列，二更新用户界面是微任务队列
-        所以是先更新用户界面 此时就有DOM结构
-      7. 方案二 
-        this.$nextTick(() => {})
-        Vue.newtTick(() => {})
-        等当前用户界面更新完毕 在触发其中的回调函数
-        将其中的回调放到更新完成DOM后再触发
-        其中的回调函数可以看做是在updated中执行，但是只会执行一次
-      8. 在Sweiper6需要手动引入其他插件才可以使用
+      1. 在mounted去new Swiper，为了保证DOM结构生成了在new
+      2. mounted直接new Swiper，此时还没有获取到banners数据
+        轮播图图片还未生成，所以失败
+      3. 要等轮播图图片数据请求回来，在new Swiper
+      4. await this.getBanners() --> 等待vuex将数据更新完毕，再执行后面代码
+      5. 轮播图数据有了，但是DOM结构没有
+        更新用户界面都是异步的，所以要等同步全部执行完，在去更新
+      6. 方案一：定时器  
+        通过定时器将new Swiper添加宏任务队列，而更新用户界面是微任务队列
+        所以是先更新用户界面，此时就有DOM结构
+        再new Swiper，此时就OK
+      7. 方案二：
+        this.$nextTick(() => {}) 
+        Vue.nextTick(() => {})  
+          等当前用户界面更新完毕，在触发其中的回调函数
+          将其中的回调函数放到更新完成DOM后在触发
+          其中的回调函数可以近似看做实在updated中执行（但是只会执行一次）
+      8. 注意：Swiper6需要手动引入其他插件才可以使用
+
+      调试代码：打印调试
     */
+
+    // 等当前用户界面更新完毕，在触发其中的回调函数
+    // this.$nextTick(() => {
+    //   new Swiper(".swiper-container", {
+    //     loop: true, // 循环模式选项
+
+    //     autoplay: {
+    //       // 自动轮播
+    //       delay: 2000, // 轮播间隔时间
+    //       disableOnInteraction: false, // 当用户点击下一页时，仍会开启自动轮播
+    //     },
+
+    //     // 如果需要分页器
+    //     pagination: {
+    //       el: ".swiper-pagination",
+    //       clickable: true,
+    //     },
+
+    //     // 如果需要前进后退按钮
+    //     navigation: {
+    //       nextEl: ".swiper-button-next",
+    //       prevEl: ".swiper-button-prev",
+    //     },
+    //   });
+    // });
+
+    // new Swiper的前提：必须先生成相应的DOM结构
+    // setTimeout(() => {
+    //   new Swiper(".swiper-container", {
+    //     loop: true, // 循环模式选项
+
+    //     // 如果需要分页器
+    //     pagination: {
+    //       el: ".swiper-pagination",
+    //     },
+
+    //     // 如果需要前进后退按钮
+    //     navigation: {
+    //       nextEl: ".swiper-button-next",
+    //       prevEl: ".swiper-button-prev",
+    //     },
+    //   });
+    // }, 0);
   },
   components: {
     Carousel,

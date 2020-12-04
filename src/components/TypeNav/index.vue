@@ -29,8 +29,24 @@
                   :data-categoryType="1"
                   >{{ category.categoryName }}</a
                 >
-                <!-- 第一种方案：使用router-link跳转，问题产生太多组件，页面性能不会很好 -->            
-                <!-- 第二种方案：编程式导航 -->              
+                <!-- 第一种方案：使用router-link跳转，问题产生太多组件，页面性能不会很好 -->
+                <!-- <router-link
+                :to="`/search?categoryName=${category.categoryName}&category1Id=${category.categoryId}`"
+                >{{ category.categoryName }}</router-link
+              > -->
+                <!-- 第二种方案：编程式导航 -->
+                <!-- <a
+                @click.prevent="
+                  $router.push({
+                    name: 'search',
+                    query: {
+                      categoryName: category.categoryName,
+                      category1Id: category.categoryId,
+                    },
+                  })
+                "
+                >{{ category.categoryName }}</a
+              > -->
               </h3>
               <div class="item-list clearfix">
                 <div class="subitem">
@@ -47,6 +63,22 @@
                         :data-categoryType="2"
                         >{{ child.categoryName }}</a
                       >
+                      <!-- <router-link
+                      :to="`/search?categoryName=${child.categoryName}&category2Id=${child.categoryId}`"
+                      >{{ child.categoryName }}</router-link
+                    > -->
+                      <!-- <a
+                      @click.prevent="
+                        $router.push({
+                          name: 'search',
+                          query: {
+                            categoryName: child.categoryName,
+                            category2Id: child.categoryId,
+                          },
+                        })
+                      "
+                      >{{ child.categoryName }}</a
+                    > -->
                     </dt>
                     <dd>
                       <!-- 三级分类名称 -->
@@ -59,7 +91,23 @@
                           :data-categoryId="grandChild.categoryId"
                           :data-categoryType="3"
                           >{{ grandChild.categoryName }}</a
-                        >                     
+                        >
+                        <!-- <router-link
+                        :to="`/search?categoryName=${grandChild.categoryName}&category3Id=${grandChild.categoryId}`"
+                        >{{ grandChild.categoryName }}</router-link
+                      > -->
+                        <!-- <a
+                        @click.prevent="
+                          $router.push({
+                            name: 'search',
+                            query: {
+                              categoryName: grandChild.categoryName,
+                              category3Id: grandChild.categoryId,
+                            },
+                          })
+                        "
+                        >{{ grandChild.categoryName }}</a
+                      > -->
                       </em>
                     </dd>
                   </dl>
@@ -137,12 +185,14 @@ export default {
         };
       }
 
+      // this.$route.path 路径路由
+      // this.$route.name 命名路由名称
       if (this.$route.name === "search") {
-         this.$router.replace(location);
+        this.$router.replace(location);
       } else {
         this.$router.push(location);
       }
-      
+      // this.$router.replace(location);
     },
   },
   mounted() {

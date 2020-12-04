@@ -15,7 +15,7 @@
         </ul>
       </div>
       <div class="ext">
-        <a href="javasrcipt:void(0);" class="sui-btn">多选</a>
+        <a href="javascript:void(0);" class="sui-btn">多选</a>
         <a href="javascript:void(0);">更多</a>
       </div>
     </div>
@@ -24,6 +24,13 @@
       <div class="fl key">{{ attrs.attrName }}</div>
       <div class="fl value">
         <ul class="type-list">
+          <!-- <li
+            v-for="(attr, index) in attrs.attrValueList"
+            :key="index"
+            @click="
+              $emit('add-prop', `${attrs.attrId}:${attr}:${attrs.attrName}`)
+            "
+          > -->
           <li
             v-for="(attr, index) in attrs.attrValueList"
             :key="index"

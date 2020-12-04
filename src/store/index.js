@@ -38,4 +38,19 @@ export default new Vuex.Store({
   actions, // 总actions
   mutations, // 总mutations
   modules, // 其他vuex模块的数据
+
+  // modules: {
+  //   home: { // home的vuex数据
+  //     state: {},
+  //     getters: {},
+  //     actions: {},
+  //     mutations: {}
+  //   },
+  //   login: { // login的vuex数据
+  //     state: {},
+  //     getters: {},
+  //     actions: {},
+  //     mutations: {}
+  //   }
+  // }
 });

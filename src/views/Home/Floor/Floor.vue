@@ -27,7 +27,6 @@
               <img :src="floor.imgUrl" />
             </div>
             <div class="floorBanner">
-              <!-- 使用Carousel -->
               <Carousel :carouselList="floor.carouselList" />
             </div>
             <div class="split">
@@ -63,11 +62,9 @@ import Carousel from "@comps/Carousel";
 
 export default {
   name: "Floor",
-  // 声明接受props  类型是object
   props: {
     floor: Object,
   },
-  // 注册组件 
   components: {
     Carousel,
   },
