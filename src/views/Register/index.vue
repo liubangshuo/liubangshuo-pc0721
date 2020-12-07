@@ -11,6 +11,7 @@
       <div class="content">
         <label>手机号:</label>
         <ValidationProvider rules="required|length|phone" v-slot="{ errors }">
+          <!-- v-model收集到数据 -->
           <input
             type="text"
             placeholder="请输入你的手机号"
@@ -54,7 +55,7 @@
         <!-- <span class="error-msg">错误提示信息</span> -->
       </div>
       <div class="btn">
-        <button @click="register">完成注册</button>
+        <button @click="submit">完成注册</button>
       </div>
     </div>
 
@@ -77,24 +78,51 @@
 </template>
 
 <script>
+// import { mapActions } from 'vuex'
 import { ValidationProvider, extend } from "vee-validate";
 import { required } from "vee-validate/dist/rules";
+/*
+  文档：https://vee-validate.logaretm.com/v3/guide/basics.html#validation-provider
+  1. 下载 
+    yarn add vee-validate
+  2. 引入组件并注册
+    局部注册
+    全局注册
+  3. 使用
+    用 ValidationProvider 组件包裹要表单校验的 表单项  
+  4. 使用检验规则
+    - 自定义规则
+      extend("length", {
+        validate(value) {
+          return value.length === 11;
+        },
+        message: "长度必须为11位", // 错误信息
+      });
+    - 内置规则
+        import { required, email } from 'vee-validate/dist/rules';
+        extend("required", {
+          ...required,
+          message: "手机号必须要填写", // 错误信息
+        });
+
+        <ValidationProvider rules="required"></ValidationProvider>  
+*/
 
 extend("required", {
   ...required,
-  message: "手机号必须填写", //错误信息
+  message: "手机号必须要填写", // 错误信息
 });
 
-extend("legth", {
+extend("length", {
   validate(value) {
     return value.length === 11;
   },
-  message: "长度为11位", // 错误信息
+  message: "长度必须为11位", // 错误信息
 });
 
 extend("phone", {
   validate(value) {
-    return /^(13[0-9]|14[01456879]|15[0-3,5-9]|16[2567]|17[0-8]|18[0-9]|19[0-3,5-9])\d{8}$/.test( 
+    return /^(13[0-9]|14[01456879]|15[0-3,5-9]|16[2567]|17[0-8]|18[0-9]|19[0-3,5-9])\d{8}$/.test(
       value
     );
   },
@@ -103,36 +131,48 @@ extend("phone", {
 
 export default {
   name: "Register",
+  // 输入用户数据
   data() {
     return {
       user: {
         phone: "", // 手机号
         password: "", // 密码
-        rePassword: "", //确认密码
+        rePassword: "", // 确认密码
         code: "", // 验证码
         isAgree: false, // 同意
       },
     };
   },
   methods: {
-    register() {
-      // 1.收集表单数据
-      const { phone, password, rePassword, code, isAgree } = this.user;
-      // 2. 进行正则校验
-      if (!isAgree) {
-        this.$message("请同意用户协议~");
-        return;
+    async submit() {
+      try {
+        // 1. 收集表单数据
+        const { phone, password, rePassword, code, isAgree } = this.user;
+        // 2. 进行正则校验
+        if (!isAgree) {
+          this.$message.error("请同意用户协议~");
+          return;
+        }
+        if (password !== rePassword) {
+          this.$message.error("两次密码输入不一致！");
+          return;
+        }
+        // 3. 发送请求注册
+        await this.$store.dispatch("register", { phone, password, code });
+        // 4. 注册成功跳转到登录
+        this.$router.push("/login");
+      } catch {
+        // 清空密码
+        this.user.password = "";
+        this.user.rePassword = "";
+        // 刷新验证码
+        this.refresh();
       }
-      if (password != rePassword) {
-        this.$message("两次输入的密码不一致! ");
-        return;
-      }
-      console.log(phone, password, rePassword, code, isAgree);
-      // 发送注册请求
     },
     // 刷新验证码
-    refresh(e) {
-      e.target.src = "http://182.92.128.115/api/user/passport/code";
+    refresh() {
+      this.$refs.code.src = "http://182.92.128.115/api/user/passport/code";
+      // e.target.src = "http://182.92.128.115/api/user/passport/code";
     },
   },
   components: {

@@ -5,7 +5,12 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+          <p v-if="$store.state.user.name">
+            <span>{{ $store.state.user.name }} </span>
+            &nbsp;
+            <button>退出</button>
+          </p>
+          <p v-else>
             <span>请</span>
             <router-link to="/login">登录</router-link>
             <router-link to="/register" class="register">免费注册</router-link>
@@ -103,11 +108,6 @@ export default {
       const location = {
         // path: "/search",
         name: "search", // 使用命名路由
-        // params: {
-        //   searchText: searchText,
-        // },
-        // query: {
-        // },
       };
 
       if (searchText) {
@@ -123,33 +123,13 @@ export default {
         location.query = this.$route.query;
       }
 
-      // if (this.$route.path.indexOf('/search') > -1) {
-      // if (this.$route.path.includes("/search")) {
-      // if (this.$route.path.startsWith("/search")) {
-      // if (/^\/search/.test(this.$route.path)) {
       // this.$route.path 路径路由
       // this.$route.name 命名路由名称
-      if (this.$route.name === 'search') {
+      if (this.$route.name === "search") {
         this.$router.replace(location);
       } else {
         this.$router.push(location);
       }
-
-      // this.$router.replace(
-      //   location
-      //   // (res) => {
-      //   //   console.log("成功", res);
-      //   // },
-      //   // (err) => {
-      //   //   console.log(err);
-      //   // }
-      // );
-      // .then((res) => {
-      //   console.log("成功", res);
-      // })
-      // .catch((err) => {
-      //   console.log("err", err);
-      // });
     },
   },
   mounted() {
