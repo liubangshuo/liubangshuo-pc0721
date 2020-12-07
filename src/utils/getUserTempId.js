@@ -10,21 +10,6 @@ import { v4 as uuidv4 } from "uuid";
 		- 如果没有，需要创建userTempId，同时保存在localStorage中
 */
 
-// class UserTempId {
-//   constructor() {
-//     this.userTempId = this.getUserTempId();
-//   }
-//   function getUserTempId() {
-//     let userTempId = localStorage.getItem("userTempId");
-//     if (userTempId) {
-//       return userTempId;
-//     }
-//     userTempId = uuidv4();
-//     localStorage.setItem("userTempId", userTempId);
-//     return userTempId;
-//   }
-// }
-
 function getUserTempId() {
 	let userTempId = localStorage.getItem("userTempId");
 
