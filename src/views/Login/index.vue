@@ -113,6 +113,10 @@ export default {
         解决：拿到token发送请求
           1. 验证token的合法性（正确，没有过期）
           2. 请求用户数据
+      
+      自动登录：
+        在Login组件判断是否有token
+        有就任务
     */
     if (this.token) {
       this.$router.replace("/");
