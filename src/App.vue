@@ -16,10 +16,24 @@ import Footer from "@comps/Footer";
 
 export default {
   name: "App",
+  // data() {
+  //   return {
+  //     isFooterShow: true,
+  //   };
+  // },
   components: {
     Header,
     Footer,
   },
+  // watch: {
+  //   $route: {
+  //     handler(newVal) {
+  //       this.isFooterShow =
+  //         newVal.path !== "/login" && newVal.path !== "/register";
+  //     },
+  //     immediate: true, // 一上来触发
+  //   },
+  // },
 };
 </script>
 

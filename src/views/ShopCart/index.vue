@@ -32,7 +32,6 @@
             >
               -
             </button>
-            <!-- @blur（失去焦点事件)   -->
             <input
               autocomplete="off"
               type="text"
@@ -81,7 +80,7 @@
           <i class="summoney">{{ totalPrice }}</i>
         </div>
         <div class="sumbtn">
-          <router-link class="sum-btn" to="/pay">结算</router-link>
+          <a class="sum-btn" @click="submit">结算</a>
         </div>
       </div>
     </div>
@@ -126,7 +125,6 @@ export default {
       // 当前商品数量是10 e.target.value 6 --> -4  6 - 10
       // 当前商品数量是3 e.target.value 6 --> 3
       // console.log(skuId, skuNum, e.target.value);
-      // 设置数据没有更改的时候不再发送请求
       if (+e.target.value === skuNum) {
         return;
       }

@@ -167,7 +167,6 @@ export default {
       const count = end - start + 1;
       return count >= 1 ? count : 0;
     },
-
   },
   methods: {
     setCurrentPage(currentPage) {
@@ -175,7 +174,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <style lang='less' scoped>

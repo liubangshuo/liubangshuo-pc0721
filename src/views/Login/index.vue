@@ -113,10 +113,6 @@ export default {
         解决：拿到token发送请求
           1. 验证token的合法性（正确，没有过期）
           2. 请求用户数据
-      
-      自动登录：
-        在Login组件判断是否有token
-        有就任务
     */
     if (this.token) {
       this.$router.replace("/");
@@ -130,7 +126,6 @@ export default {
         const { phone, password } = this.user;
         await this.$store.dispatch("login", { phone, password });
         // 登录成功
-        // 判断 如果存在 就保存起来
         if (this.isAutoLogin) {
           localStorage.setItem("token", this.token);
           localStorage.setItem("name", this.name);
@@ -222,7 +217,7 @@ export default {
               box-sizing: border-box;
               border-radius: 2px 0 0 2px;
             }
- 
+
             .pwd {
               background-position: -72px -201px;
             }

@@ -17,9 +17,9 @@ export default {
 		},
 		async updateCartCount({ commit }, { skuId, skuNum }) {
 			await reqUpdateCartCount(skuId, skuNum);
-		// 1.手动更新vuex的数据 --> 页面就会重新渲染
-		// 2.重新请求所有购物车数据
-		commit("UPDATE_CART_COUNT", { skuId, skuNum }); 
+			// 1. 手动更新vuex的数据 --> 页面就会重新渲染
+			// 2. 重新请求所有购物车数据
+			commit("UPDATE_CART_COUNT", { skuId, skuNum });
 		},
 
 		// actions函数只能接受外面的一个参数

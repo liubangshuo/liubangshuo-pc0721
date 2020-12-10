@@ -1,4 +1,4 @@
-import request from "@utils/request";
+import request from "@utlis/request";
 
 // 获取所有购物车数据
 export const reqGetCartList = () => {
@@ -9,10 +9,10 @@ export const reqGetCartList = () => {
 };
 
 // 添加、减少购物车商品数量
-export const reqUpdateCartCount = (skuId, skuNum) => {
+export const reqUpdateCartCheck = (skuId, skuNum) => {
 	return request({
 		method: "POST",
-		url: `/cart/addToCart/${skuId}/${skuNum}`,
+		url: `cart/cartList`,
 	});
 };
 
@@ -20,7 +20,7 @@ export const reqUpdateCartCount = (skuId, skuNum) => {
 export const reqUpdateCartCheck = (skuId, isChecked) => {
 	return request({
 		method: "GET",
-		url: `/cart/addToCart/${skuId}/${isChecked}`,
+		url: `cart/addTocart/${skuId}/${isChecked}`,
 	});
 };
 

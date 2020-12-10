@@ -93,19 +93,17 @@
 </template>
 
 <script>
-// import QRCode from "qrcode";
+import QRCode from "qrcode";
 import { reqGetQRCode } from "@api/pay";
 
 export default {
   name: "Pay",
   methods: {
     async submit() {
-
-      console.log(this.$route.query.orderId)
       const result = await reqGetQRCode(this.$route.query.orderId);
-      console.log(result);
+      // console.log(result);
 
-    /*   // 装换二维码
+      // 装换二维码
       QRCode.toDataURL(result.codeUrl)
         .then((url) => {
           this.$alert(
@@ -137,7 +135,7 @@ export default {
         })
         .catch(() => {
           this.$message.error("支付遇到了问题，请重新试试");
-        }); */
+        });
     },
   },
 };

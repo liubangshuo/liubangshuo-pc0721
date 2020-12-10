@@ -146,7 +146,7 @@ export default {
         orderComment: this.orderComment,
         orderDetailList: detailArrayList,
       });
-      console.log(orderId)
+
       this.$router.push({
         path: "/pay",
         query: {

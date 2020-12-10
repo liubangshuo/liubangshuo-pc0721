@@ -38,11 +38,9 @@ export const reqSubmitOrder = ({
 };
 
 // 获取订单信息列表
-export const reqGetQRCode = () => {
+export const reqGetQRCode = (orderId) => {
 	return request({
 		method: "GET",
-		url: `/user/passport/code`,
+		url: `/payment/weixin/createNative/${orderId}`,
 	});
 };
-
-
